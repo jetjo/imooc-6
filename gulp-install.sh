@@ -1,0 +1,38 @@
+# shellcheck shell=sh
+
+# brew 检查修复步骤
+brew dr check_access_directories check_brew_git_origin check_broken_sdks check_cask_environment_variables check_cask_install_location check_cask_load_path check_cask_quarantine_support check_cask_software_versions check_cask_staging_location
+brew dr check_cask_taps check_cask_xattr check_casktap_integrity check_clt_minimum_version check_clt_up_to_date check_coretap_integrity check_deleted_formula check_deprecated_caskroom_taps check_deprecated_disabled
+brew dr check_deprecated_official_taps check_exist_directories check_filesystem_case_sensitive check_for_broken_symlinks check_for_external_cmd_name_conflict check_for_gettext check_for_git check_for_iconv check_for_installed_developer_tools
+brew dr check_for_multiple_volumes check_for_non_prefixed_coreutils check_for_non_prefixed_findutils check_for_other_frameworks check_for_pydistutils_cfg_in_home check_for_stray_dylibs check_for_stray_headers check_for_stray_las check_for_stray_pcs
+brew dr check_for_stray_static_libs check_for_symlinked_cellar check_for_tap_ruby_files_locations check_for_unlinked_but_not_keg_only check_for_unreadable_installed_formula check_for_unsupported_macos check_git_newline_settings check_git_status check_git_version
+brew dr check_homebrew_prefix check_if_supported_sdk_available check_if_xcode_needs_clt_installed check_missing_deps check_multiple_cellars check_ruby_version check_tap_git_branch check_tmpdir check_tmpdir_sticky_bit
+brew doctor check_user_path_1 check_user_path_2 check_user_path_3 check_xcode_license_approved check_xcode_minimum_version check_xcode_prefix check_xcode_prefix_exists check_xcode_select_path check_xcode_up_to_date
+
+# 更新brew
+brew update
+
+# 安装node
+# brew安装node（a.k.a nodejs）
+brew install node
+# # n安装node
+# brew install n
+# n lts
+
+# 更新node
+brew upgrade node
+# n
+
+# 先检查是否已经安装
+gulp --version
+# 或者
+whereis gulp
+# 另外，检查是否是通过brew安装的
+# NOTE: 注意，brew下包名是gulp-cli，不是gulp， gulp是另外一个旧的不再维护的包，使用“brew gulp” Google时注意。
+# NOTE: 另外注意在brew页面里关于一个包的介绍，确保是自己想要的包
+brew list gulp-cli
+
+# 先删除旧版本
+npm rm --global gulp
+# 或者，如果是使用brew安装的
+brew unintall gulp-cli

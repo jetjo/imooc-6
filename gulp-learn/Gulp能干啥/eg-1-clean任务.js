@@ -1,0 +1,19 @@
+// 前提： 在工程目录下安装del包(https://github.com/sindresorhus/del)
+// npm i -D del
+// const del = require('del');
+
+async function clean()
+{
+  // return del(['dist']);
+  try
+  {
+    const { deleteAsync } = await import('del')
+    await deleteAsync(['dist']);
+    // console.log('清理完毕。');
+  } catch (error)
+  {
+    console.error(error);
+  }
+}
+
+exports.clean = clean;

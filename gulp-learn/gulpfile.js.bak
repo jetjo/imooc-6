@@ -1,0 +1,83 @@
+// 1.Gulp 插件是什么
+// Gulp 本身能做的大致就是读写文件和监控文件的变化，其他事情一般需要通过插件完成
+// Gulp 插件是完成特定工作（比如：ES6 -> ES5）的程序，它封装了通过管道（pipe）处理文件的常见功能
+// 我们一般利用 .pipe() 方法将插件放置在 src() 和 dest() 之间，处理流（stream）中的文件
+
+// 可以在这里搜索需要的插件：https://gulpjs.com/plugins/
+
+// 2.基本用法
+const { src, dest, series } = require('gulp');
+// const del = require('del');
+// npm install --save-dev gulp-babel@8.0.0 @babel/core@7.14.8 @babel/preset-env@7.14.8
+const babel = require('gulp-babel');
+// // npm install --save-dev  gulp-uglify@3.0.2
+// const uglify = require('gulp-uglify');
+// // npm install --save-dev  gulp-rename@2.0.0
+// const rename = require('gulp-rename');
+// // npm install --save-dev  gulp-concat@2.6.1
+// const concat = require('gulp-concat');
+
+// // 清除 dist 目录
+// function clean()
+// {
+//   return del(['dist']);
+// }
+
+// 处理 js
+function js()
+{
+  // return (
+  //   src('src/js/*.js')
+  //     // ES6 -> ES5
+  //     .pipe(
+  //       babel({
+  //         presets: ['@babel/env']
+  //       })
+  //     )
+  //     .pipe(dest('dist/js'))
+  // );
+
+  return (
+    src('src/js/*.js')
+      // ES6 -> ES5
+      .pipe(
+        babel({
+          presets: ['@babel/env']
+        })
+      )
+      // // 合并 JS
+      // .pipe(concat('index.js'))
+      // // 读取第三方 JS
+      // .pipe(src('src/vendor/*.js'))
+      // // 输出编译后、未压缩的 js
+      // .pipe(dest('dist/js'))
+      // // 压缩混淆
+      // .pipe(uglify())
+      // // 重命名
+      // .pipe(rename({ extname: '.min.js' }))
+      // // 输出编译后、已压缩的 js
+      .pipe(dest('dist/js'))
+  );
+}
+
+exports.default = js;// series(clean, js);
+
+// 3.常用插件
+// 3.1.HTML 相关
+// gulp-htmlmin：压缩 HTML 文件
+// gulp-file-include：引入 HTML 代码片段
+
+// 3.2.CSS 相关
+// gulp-sass/gulp-less：Sass/Less -> CSS
+// gulp-autoprefixer：自动添加厂商前缀
+// gulp-cssmin：压缩 CSS 文件
+
+// 3.3.JS 相关
+// gulp-babel：ES6 -> ES5
+// gulp-uglify：压缩混淆 JS 文件
+
+// 3.4.其他
+// gulp-rename：重命名文件
+// gulp-concat：合并文件
+// gulp-webserver：搭建本地服务器
+// webpack-stream：在 gulp 中使用 webpack
