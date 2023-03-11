@@ -49,3 +49,4 @@ bindTask('./Gulp能干啥/eg-3-js-uglify');
 bindTask('./Gulp能干啥/eg-4-js-concat');
 
 bindTask('./Gulp能干啥/eg-5-js-rename');
+bindTask('./gulp文件监控.js');
