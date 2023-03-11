@@ -44,3 +44,8 @@ function bindTask(path)
 bindTask('./Gulp能干啥/eg-1-clean任务')
 bindTask('./Gulp能干啥/eg-0-copy--test-glob')
 bindTask('./Gulp能干啥/eg-2-js-complier')
+
+bindTask('./Gulp能干啥/eg-3-js-uglify');
+bindTask('./Gulp能干啥/eg-4-js-concat');
+
+bindTask('./Gulp能干啥/eg-5-js-rename');
