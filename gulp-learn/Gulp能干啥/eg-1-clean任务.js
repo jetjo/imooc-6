@@ -2,13 +2,13 @@
 // npm i -D del
 // const del = require('del');
 
-async function clean()
+async function clean(cb, glob)
 {
   // return del(['dist']);
   try
   {
     const { deleteAsync } = await import('del')
-    await deleteAsync(['dist']);
+    await deleteAsync(glob || ['dist']);
     // console.log('清理完毕。');
   } catch (error)
   {

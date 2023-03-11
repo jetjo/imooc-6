@@ -38,7 +38,7 @@ let taskIndex = 0;
 
 function bindTask(path)
 {
-  Object.entries(require(path)).map(([taskName, task]) => exports[taskName + taskIndex++] = task);
+  Object.entries(require(path)).filter(e => e[0][0] != '_').map(([taskName, task]) => exports[taskName + taskIndex++] = task);
 }
 
 bindTask('./Gulp能干啥/eg-1-clean任务')
@@ -50,3 +50,7 @@ bindTask('./Gulp能干啥/eg-4-js-concat');
 
 bindTask('./Gulp能干啥/eg-5-js-rename');
 bindTask('./gulp文件监控.js');
+
+bindTask('./gulp实战/html压缩');
+bindTask('./gulp实战/html拼接');
+bindTask('./gulp实战/html拼接压缩');
