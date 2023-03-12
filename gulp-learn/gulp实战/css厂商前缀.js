@@ -1,20 +1,36 @@
 const { dest, watch, series } = require('gulp');
 const { watchGlob, cssClean, sassCompiler, cssDist } = require('./sass编译');
 
+const { wrapper } = require('../utils/wrapper')
+
 const autoprefixer = require('gulp-autoprefixer');
 
-function cssAutoPrefixNoClean(cb)
+const glob = ['src/css/**/*.css']
+
+function _cssAutoPrefixNoClean(cb, stream, noEmit)
 {
-  return sassCompiler(cb, null, true)
+  // console.log('---------------------------:', stream.__proto__);
+  stream ||= src(glob);
+  const res = stream
     .pipe(
       autoprefixer(
         {
           cascade: false,
-          grid: 'autoplace'
+          // grid: 'autoplace'
         }
       )
     )
-    .pipe(dest(cssDist))
+  if (noEmit)
+  {
+    // console.log('---------------------------:');
+    return res;
+  }
+  return res.pipe(dest(cssDist))
+}
+
+function cssAutoPrefixNoClean(cb)
+{
+  return _cssAutoPrefixNoClean(cb, sassCompiler(cb, null, true), false)
 }
 
 async function cssAutoPrefix(cb)
@@ -29,5 +45,6 @@ function cssAutoPrefixWatch()
 }
 
 exports.cssAutoPrefix = cssAutoPrefixNoClean;
+exports.cssAutoPrefix_ = wrapper(_cssAutoPrefixNoClean);
 
 exports._cssAutoPrefixWatch = series(cssAutoPrefix, cssAutoPrefixWatch);

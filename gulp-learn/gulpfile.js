@@ -58,3 +58,4 @@ bindTask('./gulp实战/html拼接压缩');
 bindTask('./gulp实战/sass编译');
 bindTask('./gulp实战/css厂商前缀');
 bindTask('./gulp实战/css压缩');
+bindTask('./gulp实战/css处理');

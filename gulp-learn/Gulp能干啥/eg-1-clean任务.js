@@ -8,8 +8,9 @@ async function clean(cb, glob)
   try
   {
     const { deleteAsync } = await import('del')
-    await deleteAsync(glob || ['dist']);
+    const deletedPaths = await deleteAsync(glob || ['dist']);
     // console.log('清理完毕。');
+    console.warn('Deleted files and directories:\n', deletedPaths.join('\n'));
   } catch (error)
   {
     console.error(error);

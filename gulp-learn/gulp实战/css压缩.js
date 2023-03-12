@@ -3,11 +3,15 @@ const { watchGlob, cssClean, sassCompiler, cssDist } = require('./sass编译');
 
 const cssmin = require('gulp-cssmin');
 
-function cssMinNoClean(cb, stream, noEmit)
+const { wrapper } = require('../utils/wrapper')
+
+const glob = ['src/css/**/*.css']
+
+function _cssMinNoClean(cb, stream, noEmit)
 {
-  stream ||= src([...watchGlob, '!src/scss/**/_*.{scss,sass}', 'src/css/*.css']);
-  const res = sassCompiler(cb, stream, true)
-    // const res = stream
+  // console.log('stream 是 null？？？', stream == null);
+  stream ||= src(glob);
+  const res = stream
     .pipe(
       cssmin()
     );
@@ -16,6 +20,13 @@ function cssMinNoClean(cb, stream, noEmit)
     return res;
   }
   return res.pipe(dest(cssDist))
+}
+
+function cssMinNoClean(cb, stream, noEmit)
+{
+  stream ||= src([...watchGlob, '!src/scss/**/_*.{scss,sass}', 'src/css/*.css']);
+  stream = sassCompiler(cb, stream, true);
+  return _cssMinNoClean(cb, stream, noEmit);
 }
 
 async function cssMin(cb)
@@ -31,4 +42,6 @@ function cssMinWatch()
 
 exports.cssMin = cssMinNoClean;
 
-exports.cssMinWatch = series(cssMin, cssMinWatch);
+exports.cssMin_ = wrapper(_cssMinNoClean);
+
+exports._cssMinWatch = series(cssMin, cssMinWatch);

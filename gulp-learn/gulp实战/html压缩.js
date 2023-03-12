@@ -2,6 +2,8 @@ const { src, dest, series, watch } = require('gulp');
 
 const html_min = require('gulp-htmlmin');
 
+const { wrapper } = require('../utils/wrapper')
+
 //NOTE: {htm,html}花括号里面html前面千万不能有空格！！！
 const glob = ['src/pages/*.{htm,html}']//'src/**/*.html';//['src/pages/*.{htm, html}'];
 
@@ -60,13 +62,15 @@ function htmlMinWatch()
   watch(glob, htmlMin)
 }
 
-async function clean(cb)
+async function clean(cb, glob)
 {
   //NOTE: 不要忘记加await
-  await require('../Gulp能干啥/eg-1-clean任务').clean(cb, ['dist/pages']);
+  await require('../Gulp能干啥/eg-1-clean任务').clean(cb, glob || ['dist/pages']);
 }
 
 exports._htmlMinWatch = series(htmlMin, htmlMinWatch);
 
-exports.htmlMin = htmlMinNoClean;
+// exports.htmlMin = htmlMinNoClean;
 exports.htmlClean = clean;
+
+exports.htmlMin = wrapper(htmlMinNoClean, null, () => htmlMinOpt);

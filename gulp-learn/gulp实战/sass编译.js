@@ -2,9 +2,11 @@ const { src, dest, series, watch } = require('gulp');
 
 const sass = require('gulp-sass')(require('sass'))
 
-async function cssClean(cb)
+const { wrapper } = require('../utils/wrapper')
+
+async function cssClean(cb, glob)
 {
-  await require('../Gulp能干啥/eg-1-clean任务').clean(cb, ['dist/css'])
+  await require('../Gulp能干啥/eg-1-clean任务').clean(cb, glob || ['dist/css'])
 }
 
 const glob = ['src/scss/**/*.{sass,scss}']
@@ -37,11 +39,12 @@ function sassCompilerWatch()
 
 exports.cssClean = cssClean;
 
-exports.sassCompiler = sassCompilerNoClean;
+// exports.sassCompiler = sassCompilerNoClean;
+exports.sassCompiler = wrapper(sassCompilerNoClean);
 
 exports._sassCompilerWatch = series(sassCompiler, sassCompilerWatch)
 
-exports.watchGlob = glob;
+exports.watchGlob = ['src/**/*.{scss,sass,css,less,styl}', "!src/**/_*.{scss,sacc,less,styl}"];
 
 exports.cssDist = 'dist/css';
 
