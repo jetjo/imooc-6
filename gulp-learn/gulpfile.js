@@ -54,3 +54,7 @@ bindTask('./gulp文件监控.js');
 bindTask('./gulp实战/html压缩');
 bindTask('./gulp实战/html拼接');
 bindTask('./gulp实战/html拼接压缩');
+
+bindTask('./gulp实战/sass编译');
+bindTask('./gulp实战/css厂商前缀');
+bindTask('./gulp实战/css压缩');
