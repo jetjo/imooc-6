@@ -12,6 +12,7 @@ function uglifyJs(cb, stream, noEmit)
   //   // cb()
   // )
   stream ||= src(['src/**/*.js', '!src/**/vendor/**']);
+  if (process.env.GULP_ENV === 'dev') return stream;
   const res = stream
     .pipe(
       uglify()

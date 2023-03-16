@@ -1,3 +1,11 @@
+delete process.env.VARIABLE
+require('dotenv').config({
+  path: '.env.dev',
+  override: true
+});
+
+// console.log('查看环境变量：', process.env);
+
 const { src, series, parallel, watch } = require('gulp');
 const webserver = require('gulp-webserver');
 
@@ -41,4 +49,13 @@ function devServer(cb, stream)
   // stream.emit('kill');//kill devServer
 }
 
-exports.devServer = parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt));
+exports.devServer = series((cb) =>
+{
+  delete process.env.VARIABLE
+  require('dotenv').config({
+    path: '.env.dev',
+    override: true
+  });
+  console.log('查看环境变量：', process.env);
+  cb();
+}, parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt)));

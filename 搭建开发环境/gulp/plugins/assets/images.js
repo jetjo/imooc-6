@@ -1,9 +1,11 @@
 const { src, dest, watch, series } = require('gulp');
 const { clean } = require('../clean');
 
+const isDev = process.env.GULP_ENV?.startsWith('dev');
+
 async function imageHandle(cb)
 {
-  await clean(cb, ['dev/images']);
+  await clean(cb, [isDev ? 'dev/images' : 'dist/images']);
   return imagesHandleNoClean(cb);
 }
 
@@ -20,7 +22,7 @@ function imagesHandleNoClean(cb)
     //     // // dirname: streamPath.extname ? streamPath.dirname + '/newPath/' : streamPath.dirname
     //   }
     // })
-    .pipe(dest('dev'));
+    .pipe(dest(isDev ? 'dev' : 'dist'));
 }
 
 function imagesHandleWatch()
@@ -30,4 +32,4 @@ function imagesHandleWatch()
 
 exports.imagesHandleWatch = series(imageHandle, imagesHandleWatch);
 
-exports.imagesHandle = imagesHandleNoClean;
+exports.imagesHandle = imageHandle;

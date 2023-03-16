@@ -7,9 +7,11 @@ const { cssMin } = require('./css压缩');
 
 const rename = require('gulp-rename');
 
+const isDev = process.env.GULP_ENV?.startsWith('dev');
+
 async function cssHandle(cb)
 {
-  await clean(cb, ['dev/css']);
+  await clean(cb, [isDev ? 'dev/css' : 'dist/css']);
   return cssHandleNoClean(cb);
 }
 
@@ -20,7 +22,7 @@ function cssHandleNoClean(cb)
     .sassCompiler()
     .pipe(src('src/**/*.css'))
     .cssAutoPrefix()
-    // .cssMin()
+    .cssMin()
     .pipe(
       rename((streamPath) =>
       {
@@ -32,7 +34,7 @@ function cssHandleNoClean(cb)
         }
       })
     )
-    .pipe(dest('dev'));
+    .pipe(dest(isDev ? 'dev' : 'dist'));
 }
 
 function cssHandleWatch()
@@ -43,4 +45,4 @@ function cssHandleWatch()
 
 exports.cssHandleWatch = series(cssHandle, cssHandleWatch);
 
-exports.cssHandle = cssHandleNoClean;
+exports.cssHandle = cssHandle;

@@ -10,6 +10,7 @@ const cssDist = 'dist/css';
 function cssMin(cb, stream, noEmit)
 {
   stream ||= src(glob);
+  if (process.env.GULP_ENV === 'dev') return stream;
   const res = stream
     .pipe(
       cssmin()
