@@ -6,7 +6,7 @@ const { wrapper } = require('../../utils/wrapper')
 function concatJs(cb, stream, noEmit)
 {
   stream ||= src(['src/**/*.js', '!src/**/vendor/**']);
-  if (process.env.GULP_ENV === 'dev') return stream;
+  if (process.env?.GULP_ENV === 'dev') return stream;
   const res = stream
     .pipe(
       concat('index.js')

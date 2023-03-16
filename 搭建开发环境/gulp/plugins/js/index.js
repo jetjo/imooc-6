@@ -9,12 +9,14 @@ const isDev = process.env.GULP_ENV?.startsWith('dev');
 
 async function jsHandle(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   await clean(cb, [isDev ? 'dev/js' : 'dist/js']);
   return jsHandleNoClean(cb);
 }
 
 function jsHandleNoClean(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   // console.log({ sassCompiler, cssAutoPrefix, cssMin });
   return src(['src/**/*.{js,cjs}', '!src/**/vendor/**'])
     .complierJS()
@@ -37,6 +39,6 @@ function jsHandleWatch()
   watch('src/**/*.{js,cjs}', jsHandle);
 }
 
-exports.jsHandleWatch = series(jsHandle, jsHandleWatch);
+exports.jsHandleWatch = jsHandleWatch; //series(jsHandle, jsHandleWatch);
 
 exports.jsHandle = jsHandle;

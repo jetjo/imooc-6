@@ -11,12 +11,14 @@ const isDev = process.env.GULP_ENV?.startsWith('dev');
 
 async function cssHandle(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   await clean(cb, [isDev ? 'dev/css' : 'dist/css']);
   return cssHandleNoClean(cb);
 }
 
 function cssHandleNoClean(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   // console.log({ sassCompiler, cssAutoPrefix, cssMin });
   return src(['src/**/*.{scss,sass}', '!src/**/_*.{scss,sass}'])
     .sassCompiler()
@@ -43,6 +45,6 @@ function cssHandleWatch()
   // watch('src/**/*.{css,sass,scss,less,styl}', cssHandle);
 }
 
-exports.cssHandleWatch = series(cssHandle, cssHandleWatch);
+exports.cssHandleWatch = cssHandleWatch; //series(cssHandle, cssHandleWatch);
 
 exports.cssHandle = cssHandle;

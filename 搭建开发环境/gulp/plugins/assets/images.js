@@ -5,12 +5,14 @@ const isDev = process.env.GULP_ENV?.startsWith('dev');
 
 async function imageHandle(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   await clean(cb, [isDev ? 'dev/images' : 'dist/images']);
   return imagesHandleNoClean(cb);
 }
 
 function imagesHandleNoClean(cb)
 {
+  const isDev = process.env.GULP_ENV?.startsWith('dev');
   // console.log({ sassCompiler, cssAutoPrefix, cssMin });
   return src(['src/**/*.{jpg,jpeg,png}'])
     // .renameJs((streamPath) =>
@@ -30,6 +32,6 @@ function imagesHandleWatch()
   watch('src/**/*.{jpg,jpeg,png}', imageHandle);
 }
 
-exports.imagesHandleWatch = series(imageHandle, imagesHandleWatch);
+exports.imagesHandleWatch = imagesHandleWatch; //series(imageHandle, imagesHandleWatch);
 
 exports.imagesHandle = imageHandle;

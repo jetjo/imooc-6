@@ -5,3 +5,4 @@
 *.retypewriter
 tmp/
 **/dev-dist
+**/dev

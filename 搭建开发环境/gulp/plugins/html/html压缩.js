@@ -31,7 +31,7 @@ const htmlMinOpt = {
 function htmlMin(cb, stream, noEmit)
 {
   stream ||= src(glob);
-  if (process.env.GULP_ENV === 'dev') return stream;
+  if (process.env?.GULP_ENV === 'dev') return stream;
   // await clean(cb);
   // cb();
   // return;

@@ -11,7 +11,7 @@ const opt = {
 function complierJS(cb, stream, noEmit)
 {
   stream ||= src(['src/**/*.js', '!src/**/vendor/**']);
-  if (process.env.GULP_ENV === 'dev') return stream;
+  if (process.env?.GULP_ENV === 'dev') return stream;
   const res = stream
     .pipe(
       babel({

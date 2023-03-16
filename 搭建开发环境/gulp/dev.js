@@ -10,10 +10,10 @@ const { src, series, parallel, watch } = require('gulp');
 const webserver = require('gulp-webserver');
 
 const { wrapper } = require('./utils/wrapper');
-const { htmlIncludeMinWatch } = require('./plugins/html/index');
-const { imagesHandleWatch } = require('./plugins/assets/images');
-const { cssHandleWatch } = require('./plugins/css/index');
-const { jsHandleWatch } = require('./plugins/js/index');
+const { htmlIncludeMinWatch, htmlIncludeMin } = require('./plugins/html/index');
+const { imagesHandleWatch, imagesHandle } = require('./plugins/assets/images');
+const { cssHandleWatch, cssHandle } = require('./plugins/css/index');
+const { jsHandleWatch, jsHandle } = require('./plugins/js/index');
 
 const opt = {
   // // reach the server from the network
@@ -58,4 +58,4 @@ exports.devServer = series((cb) =>
   });
   console.log('查看环境变量：', process.env);
   cb();
-}, parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt)));
+}, parallel(htmlIncludeMin, imagesHandle, cssHandle, jsHandle), parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt)));
