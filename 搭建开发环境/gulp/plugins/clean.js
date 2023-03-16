@@ -16,4 +16,4 @@ async function clean(cb, glob)
   }
 }
 
-exports.cssClean = clean;
+exports.clean = clean;

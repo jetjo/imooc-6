@@ -1,6 +1,6 @@
 const { src, dest, watch, series } = require('gulp');
 
-const { cssClean } = require('./cssClean');
+const { clean } = require('../clean');
 const { sassCompiler } = require('./sass编译');
 const { cssAutoPrefix } = require('./css厂商前缀');
 const { cssMin } = require('./css压缩');
@@ -9,7 +9,7 @@ const rename = require('gulp-rename');
 
 async function cssHandle(cb)
 {
-  await cssClean(cb, ['dist/css']);
+  await clean(cb, ['dev/css']);
   return cssHandleNoClean(cb);
 }
 
@@ -32,7 +32,7 @@ function cssHandleNoClean(cb)
         }
       })
     )
-    .pipe(dest('dist'));
+    .pipe(dest('dev'));
 }
 
 function cssHandleWatch()

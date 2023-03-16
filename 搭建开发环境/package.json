@@ -21,6 +21,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
+    "gulp-webserver": "^0.9.1",
     "readable-stream": "^4.3.0",
     "sass": "^1.59.2"
   },

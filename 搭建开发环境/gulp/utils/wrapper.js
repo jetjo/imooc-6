@@ -36,8 +36,9 @@ function wrap(pipeHandler, optMerger, optGetter)
       _optMerger(cbOrOpt)
       cbOrOpt = null;
     }
-    else if (this)
+    else if (this && !(cbOrOpt instanceof Function))
     {
+      // console.log('???????', this, '---------', cbOrOpt, '???????');
       throw new Error('this 类型错误！')
     }
     const cb = cbOrOpt;
