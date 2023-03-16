@@ -1,0 +1,20 @@
+{
+    // "sourceType": "unambiguous",
+    "presets": [
+        "@babel/preset-typescript",
+        "@babel/preset-env",
+        // [
+        //     "@babel/preset-env", 
+        //     {
+        //         "forceAllTransforms": true,
+        //         "spec": true,
+        //         "modules": false,
+        //         "useBuiltIns": "usage",
+        //         "corejs": "3.6.5",
+        //         "targets": {
+        //             "firefox": "50"
+        //         }
+        //     }
+        // ]
+    ]
+}

@@ -1,8 +1,5 @@
-delete process.env.VARIABLE
-require('dotenv').config({
-  path: '.env.dev',
-  override: true
-});
+const { loadEnv } = require('./plugins/load-env');
+loadEnv('.env.dev')();
 
 // console.log('查看环境变量：', process.env);
 
@@ -14,6 +11,8 @@ const { htmlIncludeMinWatch, htmlIncludeMin } = require('./plugins/html/index');
 const { imagesHandleWatch, imagesHandle } = require('./plugins/assets/images');
 const { cssHandleWatch, cssHandle } = require('./plugins/css/index');
 const { jsHandleWatch, jsHandle } = require('./plugins/js/index');
+
+const { delay } = require('./plugins/delay');
 
 const opt = {
   // // reach the server from the network
@@ -49,13 +48,9 @@ function devServer(cb, stream)
   // stream.emit('kill');//kill devServer
 }
 
-exports.devServer = series((cb) =>
-{
-  delete process.env.VARIABLE
-  require('dotenv').config({
-    path: '.env.dev',
-    override: true
-  });
-  console.log('查看环境变量：', process.env);
-  cb();
-}, parallel(htmlIncludeMin, imagesHandle, cssHandle, jsHandle), parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt)));
+exports.devServer = series(
+  loadEnv('.env.dev'),
+  parallel(htmlIncludeMin, imagesHandle, cssHandle, jsHandle),
+  delay(5000),
+  parallel(htmlIncludeMinWatch, jsHandleWatch, cssHandleWatch, imagesHandleWatch, wrapper(devServer, null, () => opt))
+);

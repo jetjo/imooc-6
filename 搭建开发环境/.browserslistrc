@@ -1,0 +1,13 @@
+[production]
+last 2 versions
+> 5%
+
+[ssr]
+node 10
+
+[development]
+last 1 chrome version
+
+### last 2 versions
+### not ie <= 10
+### > 1% in CN
