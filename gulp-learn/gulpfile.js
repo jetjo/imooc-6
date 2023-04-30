@@ -1,4 +1,6 @@
-// const { task } = require('gulp');
+const { task } = require( 'gulp' );
+const gulp = require( 'gulp' );
+// console.log(gulp)
 
 // // 导入任务方式1:
 // exports.taskEndMode = require('./任务结束方式');
@@ -41,6 +43,11 @@ function bindTask(path)
   Object.entries(require(path)).filter(e => e[0][0] != '_').map(([taskName, task]) => exports[taskName + taskIndex++] = task);
 }
 
+function bindTaskAsync ( path )
+{
+  require( path );
+}
+
 bindTask('./Gulp能干啥/eg-1-clean任务')
 bindTask('./Gulp能干啥/eg-0-copy--test-glob')
 bindTask('./Gulp能干啥/eg-2-js-complier')
@@ -58,4 +65,8 @@ bindTask('./gulp实战/html拼接压缩');
 bindTask('./gulp实战/sass编译');
 bindTask('./gulp实战/css厂商前缀');
 bindTask('./gulp实战/css压缩');
-bindTask('./gulp实战/css处理');
+bindTask( './gulp实战/css处理' );
+
+bindTask( './任务参数.js' );
+
+bindTaskAsync( "./gulp实战/gif2webp.js" );

@@ -6,3 +6,7 @@
 tmp/
 **/dev-dist
 **/dev
+*.gif
+gulp-learn/.DS_Store
+.gitignore
+.DS_Store
