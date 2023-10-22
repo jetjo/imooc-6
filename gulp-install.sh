@@ -36,3 +36,5 @@ brew list gulp-cli
 npm rm --global gulp
 # 或者，如果是使用brew安装的
 brew unintall gulp-cli
+
+# 测试
