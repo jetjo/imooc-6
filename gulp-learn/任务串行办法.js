@@ -7,6 +7,7 @@ exports.s_task1 = function (cb)
     cb();
   }, 1000);
 }
+// 测试
 exports.s_task2 = function (cb)
 {
   console.log('串行任务2开始...');
